@@ -1,0 +1,9 @@
+# Cloudflare Pages — быстрее за счёт CDN-кэша
+/telemetry-heartbeat.mp3
+  Cache-Control: public, max-age=604800
+
+/index.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+/
+  Cache-Control: public, max-age=0, must-revalidate

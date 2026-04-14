@@ -1,0 +1,1517 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ИИнтеграция — от цифрового надзора к умному управлению</title>
+  <meta name="description" content="ИИнтеграция помогает регионам перейти от контрольного ИИ к предиктивному управлению: диагностика зрелости, пилоты, KPI и масштабирование." />
+  <meta name="theme-color" content="#04060f" />
+  <meta property="og:title" content="ИИнтеграция — от цифрового надзора к умному управлению" />
+  <meta property="og:description" content="Переход от цифрового контроля к предиктивному управлению с понятными KPI, дорожной картой и пилотом." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@100;200;300;400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #04060f;
+      --surface: #080c18;
+      --border:  rgba(90, 160, 220, 0.1);
+      --accent:  #4ab8d4;
+      --accent2: #2a6888;
+      --text:    rgba(210, 228, 244, 0.9);
+      --muted:   rgba(140, 170, 200, 0.55);
+      --font-h:  'Exo 2', 'Arial Narrow', Arial, sans-serif;
+      --font-b:  'Inter', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); overflow-x: hidden; font-family: var(--font-b); }
+
+    /* ─── ANIMATED SECTIONS ─────────────────────────────── */
+    .anim-section {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .anim-wrap {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 0;
+    }
+    .anim-wrap > div { transform-origin: center center; flex-shrink: 0; }
+
+    .badge-cover { display: none !important; }
+    .fade-bottom {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 35vh;
+      background: linear-gradient(to bottom, transparent, var(--bg));
+      z-index: 5; pointer-events: none;
+    }
+    .fade-top {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 28vh;
+      background: linear-gradient(to top, transparent, var(--bg));
+      z-index: 5; pointer-events: none;
+    }
+
+    /* ─── HERO LOGO ─────────────────────────────────────── */
+    .hero-logo {
+      position: absolute;
+      top: 72%; left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 10;
+      text-align: center;
+      pointer-events: none;
+      user-select: none;
+      white-space: nowrap;
+    }
+    .hero-logo .brand {
+      display: block;
+      font-family: var(--font-h);
+      font-weight: 100;
+      font-size: clamp(20px, 2.6vw, 42px);
+      letter-spacing: 0.28em;
+      text-indent: 0.28em;
+      text-transform: uppercase;
+      color: rgba(190, 210, 228, 0.85);
+    }
+    .hero-logo .slogan {
+      display: block;
+      margin-top: 14px;
+      font-family: var(--font-b);
+      font-weight: 300;
+      font-size: clamp(11px, 1.1vw, 15px);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(130, 170, 200, 0.5);
+    }
+
+    /* ─── CONTENT SECTIONS ──────────────────────────────── */
+    .section {
+      width: 100%;
+      padding: 100px 0;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+
+    /* Label */
+    .label {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-h);
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      opacity: 0.7;
+      margin-bottom: 24px;
+    }
+    .label::before {
+      content: '';
+      display: block;
+      width: 24px; height: 1px;
+      background: var(--accent);
+      opacity: 0.5;
+    }
+
+    /* Section title */
+    .s-title {
+      font-family: var(--font-h);
+      font-weight: 200;
+      font-size: clamp(28px, 3.5vw, 52px);
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+    .s-title em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    /* Section subtitle */
+    .s-sub {
+      font-size: clamp(14px, 1.2vw, 17px);
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--muted);
+      max-width: 680px;
+    }
+
+    /* Divider */
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: var(--border);
+      margin: 60px 0;
+    }
+
+    /* ─── PROBLEM SECTION ───────────────────────────────── */
+    .problem-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      margin-top: 64px;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .problem-cell {
+      position: relative;
+      padding: 40px 44px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .problem-cell > * {
+      position: relative;
+      z-index: 2;
+    }
+    .problem-cell .cell-label {
+      font-family: var(--font-h);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      opacity: 0.6;
+      margin-bottom: 16px;
+    }
+    .problem-cell h3 {
+      font-family: var(--font-h);
+      font-weight: 300;
+      font-size: 18px;
+      line-height: 1.35;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+    .problem-cell p {
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    /* Problem block: крупнее на ~2 pt (заголовок секции, сетка, финальная строка) */
+    .problem-section .label {
+      font-size: 13px;
+    }
+    .problem-section .s-title {
+      font-size: clamp(30px, 3.7vw, 54px);
+    }
+    .problem-section .s-sub {
+      font-size: clamp(16px, 1.35vw, 19px);
+    }
+    .problem-section .problem-cell .cell-label {
+      font-size: 12px;
+    }
+    .problem-section .problem-cell h3 {
+      font-size: 20px;
+    }
+    .problem-section .problem-cell p {
+      font-size: 16px;
+    }
+    .problem-section .problem-cell.problem-footer .problem-footer-text {
+      font-size: 17px;
+      color: rgba(210, 228, 244, 0.7);
+      line-height: 1.7;
+    }
+
+    /* ─── WHAT WE DO ────────────────────────────────────── */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
+      margin-top: 64px;
+    }
+    .card {
+      padding: 40px 44px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      transition: border-color 0.3s;
+    }
+    .card:hover { border-color: rgba(74, 184, 212, 0.25); }
+    .card-icon {
+      width: 36px; height: 36px;
+      border: 1px solid rgba(74,184,212,0.3);
+      border-radius: 2px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 24px;
+    }
+    .card-icon svg { width: 16px; height: 16px; stroke: var(--accent); fill: none; stroke-width: 1.5; }
+    .card h3 {
+      font-family: var(--font-h);
+      font-weight: 300;
+      font-size: 20px;
+      color: var(--text);
+      margin-bottom: 10px;
+      letter-spacing: 0.01em;
+    }
+    .card p {
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    /* ─── WHAT WE DO PREMIUM ─────────────────────────────── */
+    .what-we-do-premium {
+      position: relative;
+      overflow: hidden;
+    }
+    /* Заплатка под бейдж Unicorn: строго между фоном и .container (z:3), чтобы линии сетки 2px не перекрывались. */
+    .what-we-do-premium::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: 32px;
+      transform: translateX(-50%);
+      width: min(88vw, 280px);
+      height: 76px;
+      z-index: 2;
+      pointer-events: none;
+      border-radius: 2px;
+      background: var(--bg);
+    }
+    .what-we-do-premium-anim {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 0;
+      opacity: 0.72;
+      pointer-events: none;
+      mix-blend-mode: screen;
+    }
+    .what-we-do-premium-anim > div {
+      transform-origin: center center;
+      flex-shrink: 0;
+    }
+    .what-we-do-premium-fade {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse at center, rgba(4, 6, 15, 0.08) 0%, rgba(4, 6, 15, 0.32) 64%, rgba(4, 6, 15, 0.74) 100%),
+        linear-gradient(to bottom, rgba(4, 6, 15, 0.68), rgba(4, 6, 15, 0.16) 24%, rgba(4, 6, 15, 0.14) 72%, rgba(4, 6, 15, 0.72)),
+        linear-gradient(to right, rgba(4, 6, 15, 0.64), rgba(4, 6, 15, 0.1) 22%, rgba(4, 6, 15, 0.1) 78%, rgba(4, 6, 15, 0.64));
+    }
+    .what-we-do-premium .container {
+      position: relative;
+      z-index: 3;
+    }
+    .what-we-do-premium .card {
+      background: rgba(8, 12, 24, 0.62);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border-color: rgba(90, 160, 220, 0.18);
+      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s, background 0.3s;
+    }
+    .what-we-do-premium .card:hover {
+      transform: translateY(-3px);
+      background: rgba(8, 12, 24, 0.74);
+      border-color: rgba(74, 184, 212, 0.42);
+      box-shadow: 0 10px 34px rgba(12, 36, 66, 0.28);
+    }
+    .what-we-do-premium .label {
+      font-size: 13px;
+    }
+    .what-we-do-premium .s-title {
+      font-size: clamp(30px, 3.7vw, 54px);
+    }
+
+    /* ─── WHY NOW ───────────────────────────────────────── */
+    .why-now-inner {
+      margin-top: 0;
+    }
+    .fork {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      margin-top: 48px;
+    }
+    .fork-side {
+      padding: 44px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+    }
+    .fork-side.active { border-color: rgba(74, 184, 212, 0.3); }
+    .fork-tag {
+      font-family: var(--font-h);
+      font-size: 13px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .fork-tag.old { color: rgba(200, 100, 100, 0.6); }
+    .fork-tag.new { color: var(--accent); }
+    .fork-side h3 {
+      font-family: var(--font-h);
+      font-weight: 200;
+      font-size: clamp(22px, 2.2vw, 26px);
+      margin-bottom: 20px;
+      color: var(--text);
+    }
+    .fork-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .fork-list li {
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 1.6;
+      color: var(--muted);
+      padding-left: 22px;
+      position: relative;
+    }
+    .fork-list li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      opacity: 0.5;
+    }
+    .fork-side.active .fork-list li::before { opacity: 1; }
+
+    /* ─── APPROACH ──────────────────────────────────────── */
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      margin-top: 56px;
+    }
+    .step {
+      display: grid;
+      grid-template-columns: 84px 1fr;
+      gap: 0;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      transition: border-color 0.3s;
+    }
+    .step:hover { border-color: rgba(74, 184, 212, 0.2); }
+    .step-num {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-right: 1px solid var(--border);
+      font-family: var(--font-h);
+      font-weight: 100;
+      font-size: 34px;
+      color: rgba(74, 184, 212, 0.25);
+      letter-spacing: 0.05em;
+    }
+    .step-body {
+      padding: 28px 36px;
+    }
+    .step-body h3 {
+      font-family: var(--font-h);
+      font-weight: 300;
+      font-size: 19px;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .step-body p {
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 1.65;
+      color: var(--muted);
+    }
+
+    /* ─── PRODUCTS ──────────────────────────────────────── */
+    .products {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-top: 56px;
+    }
+    .product {
+      padding: 10px 36px 40px 36px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      transition: border-color 0.3s;
+      display: flex;
+      flex-direction: column;
+    }
+    .product:hover { border-color: rgba(74, 184, 212, 0.25); }
+    .product-num {
+      font-family: var(--font-h);
+      font-weight: 100;
+      font-size: 48px;
+      color: rgba(74, 184, 212, 0.15);
+      margin-bottom: 14px;
+      margin-top: 0;
+      line-height: 1;
+    }
+    .product h3 {
+      font-family: var(--font-h);
+      font-weight: 300;
+      font-size: 20px;
+      color: var(--text);
+      margin-bottom: 12px;
+      line-height: 1.35;
+    }
+    .product p {
+      font-size: 17px;
+      font-weight: 300;
+      line-height: 1.65;
+      color: var(--muted);
+      flex: 1;
+    }
+    .approach-section:not(.approach-section--five-steps) .s-sub {
+      font-size: clamp(18px, 1.42vw, 21px);
+    }
+    .approach-section:not(.approach-section--five-steps) .label {
+      font-size: 12px;
+    }
+    /* «Продукты»: секция чуть ниже на странице + больше воздуха до ряда 01–03 */
+    .approach-section:not(.approach-section--five-steps) {
+      padding-top: calc(120px + clamp(28px, 4vh, 52px));
+      padding-bottom: 120px;
+    }
+    .approach-section:not(.approach-section--five-steps) .products {
+      margin-top: clamp(72px, 8vw, 100px);
+    }
+
+    /* ─── TRUST ─────────────────────────────────────────── */
+    .trust-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      margin-top: 56px;
+    }
+    .trust-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 32px;
+      padding: 32px 44px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+    }
+    .trust-item .t-icon {
+      width: 40px; height: 40px;
+      border: 1px solid rgba(74,184,212,0.25);
+      border-radius: 2px;
+      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .trust-item .t-icon svg { width: 18px; height: 18px; stroke: var(--accent); fill: none; stroke-width: 1.4; }
+    .trust-item p {
+      font-size: 15px;
+      font-weight: 300;
+      line-height: 1.65;
+      color: var(--text);
+      padding-top: 8px;
+    }
+
+    /* ─── TRUST SECTION (animated bg) ───────────────────── */
+    .trust-section {
+      position: relative;
+      overflow: hidden;
+      /* Подтягиваем «нижнее русло» вверх, перекрывая зазор с бейджем Unicorn под блоком «Продукты» */
+      margin-top: clamp(-88px, -6vw, -56px);
+      padding-top: calc(100px + max(56px, min(88px, 6vw)));
+    }
+    .trust-section::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: 24px;
+      transform: translateX(-50%);
+      width: min(88vw, 280px);
+      height: 76px;
+      z-index: 2;
+      pointer-events: none;
+      border-radius: 2px;
+      background: var(--bg);
+    }
+    .trust-anim {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 0;
+      opacity: 0.3;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .trust-anim > div {
+      transform-origin: center center;
+      flex-shrink: 0;
+    }
+    .trust-anim-fade {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(
+          to bottom,
+          var(--bg) 0%,
+          rgba(4, 6, 15, 0.82) 10%,
+          rgba(4, 6, 15, 0.38) 26%,
+          transparent 44%,
+          transparent 62%,
+          rgba(4, 6, 15, 0.28) 82%,
+          rgba(4, 6, 15, 0.75) 94%,
+          var(--bg) 100%
+        ),
+        linear-gradient(to right, var(--bg) 0%, transparent 18%, transparent 82%, var(--bg) 100%);
+      z-index: 1;
+      pointer-events: none;
+    }
+    .trust-section .container {
+      position: relative;
+      z-index: 3;
+    }
+    /* Мягкая «шапка» Trust — перекрывает стык с блоком «Продукты» */
+    .trust-section::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: clamp(96px, 28vh, 320px);
+      z-index: 2;
+      pointer-events: none;
+      background: linear-gradient(
+        to bottom,
+        var(--bg) 0%,
+        rgba(4, 6, 15, 0.9) 14%,
+        rgba(4, 6, 15, 0.52) 38%,
+        rgba(4, 6, 15, 0.18) 68%,
+        rgba(4, 6, 15, 0) 100%
+      );
+    }
+
+    /* ─── APPROACH SECTION (animated bg) ───────────────── */
+    .approach-section {
+      position: relative;
+      overflow: hidden;
+      padding: 120px 0;
+    }
+    .approach-section--five-steps {
+      /* Компактная секция, чтобы 5 шагов помещались на типичный экран по высоте */
+      padding-top: clamp(44px, 6.5vh, 92px);
+      padding-bottom: clamp(52px, 7.5vh, 100px);
+      overflow-x: clip;
+    }
+    .approach-anim {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 0;
+      opacity: 0.38;
+      overflow: hidden;
+    }
+    .approach-anim > div { transform-origin: center center; flex-shrink: 0; }
+    .approach-anim-fade {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to bottom, var(--bg) 0%, transparent 18%, transparent 82%, var(--bg) 100%),
+        linear-gradient(to right,  var(--bg) 0%, transparent 20%, transparent 80%, var(--bg) 100%);
+      z-index: 1; pointer-events: none;
+    }
+    /* Длинное затухание к низу только у «Продуктов» — без резкой линии к Trust */
+    .approach-section:not(.approach-section--five-steps) .approach-anim-fade {
+      background:
+        linear-gradient(
+          to bottom,
+          var(--bg) 0%,
+          rgba(4, 6, 15, 0.55) 8%,
+          rgba(4, 6, 15, 0.12) 20%,
+          transparent 34%,
+          transparent 48%,
+          rgba(4, 6, 15, 0.1) 68%,
+          rgba(4, 6, 15, 0.42) 82%,
+          rgba(4, 6, 15, 0.82) 94%,
+          var(--bg) 100%
+        ),
+        linear-gradient(to right, var(--bg) 0%, transparent 20%, transparent 80%, var(--bg) 100%);
+    }
+    .approach-content {
+      position: relative;
+      z-index: 3;
+    }
+    .approach-main-content {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+    .approach-main-content .steps {
+      margin-top: 56px;
+      margin-bottom: 0;
+    }
+    .approach-section--five-steps .label {
+      font-size: 12px;
+      margin-bottom: 16px;
+    }
+    .approach-section--five-steps .s-title {
+      font-size: clamp(24px, 3.1vw, 44px);
+      line-height: 1.12;
+      margin-bottom: 12px;
+    }
+    .approach-section--five-steps .s-sub {
+      font-size: clamp(15px, 1.2vw, 18px);
+      line-height: 1.55;
+    }
+    .approach-section--five-steps .approach-main-content .steps {
+      margin-top: 28px;
+    }
+    .approach-section--five-steps .approach-anim {
+      clip-path: inset(0 0 clamp(56px, 10vh, 120px) 0);
+    }
+    .approach-section--five-steps .approach-bottom-mask {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: clamp(104px, 16vh, 200px);
+      z-index: 2;
+      pointer-events: none;
+      background: linear-gradient(
+        to top,
+        var(--bg) 0%,
+        var(--bg) 45%,
+        rgba(4, 6, 15, 0.92) 72%,
+        rgba(4, 6, 15, 0) 100%
+      );
+    }
+    /* Уже и с большим «воздухом» от краёв окна — блок шагов не вылезает */
+    .approach-section--five-steps .approach-content.container {
+      width: 100%;
+      max-width: min(920px, calc(100vw - 56px));
+      padding-left: clamp(24px, 5vw, 56px);
+      padding-right: clamp(24px, 5vw, 56px);
+      box-sizing: border-box;
+    }
+    .approach-section--five-steps .steps {
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+    }
+    .approach-section--five-steps .step {
+      grid-template-columns: 76px 1fr;
+      min-width: 0;
+      max-width: 100%;
+    }
+    .approach-section--five-steps .step-num {
+      font-size: 28px;
+    }
+    .approach-section--five-steps .step-body {
+      min-width: 0;
+      padding: 16px 20px;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+    }
+    .approach-section--five-steps .step-body h3 {
+      font-size: 18px;
+      margin-bottom: 5px;
+      line-height: 1.28;
+    }
+    .approach-section--five-steps .step-body p {
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    /* Доп. слой снизу «Продукты»: длинная кривая к --bg (под карточками, z:2) */
+    .approach-section:not(.approach-section--five-steps)::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: clamp(120px, 34vh, 380px);
+      z-index: 2;
+      pointer-events: none;
+      background: linear-gradient(
+        to bottom,
+        rgba(4, 6, 15, 0) 0%,
+        rgba(4, 6, 15, 0.05) 12%,
+        rgba(4, 6, 15, 0.18) 32%,
+        rgba(4, 6, 15, 0.42) 55%,
+        rgba(4, 6, 15, 0.72) 78%,
+        rgba(4, 6, 15, 0.94) 94%,
+        var(--bg) 100%
+      );
+    }
+
+    /* ─── FINAL CTA ─────────────────────────────────────── */
+    .cta-section {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      overflow: hidden;
+      border-top: 1px solid var(--border);
+    }
+    .cta-anim {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 0;
+      overflow: hidden;
+      filter: blur(7px);
+      -webkit-filter: blur(7px);
+      transform: scale(1.06);
+    }
+    .cta-anim > div { transform-origin: center center; flex-shrink: 0; }
+    .cta-anim-fade-top {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 40%;
+      background: linear-gradient(to bottom, var(--bg), transparent);
+      z-index: 1; pointer-events: none;
+    }
+    .cta-anim-fade-bottom {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 30%;
+      background: linear-gradient(to top, var(--bg), transparent);
+      z-index: 1; pointer-events: none;
+    }
+    .cta-content {
+      position: relative;
+      z-index: 5;
+      padding: 120px 0 140px;
+    }
+    .cta-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .cta-inner .s-title { max-width: 720px; margin-bottom: 16px; }
+    .cta-inner .s-sub {
+      text-align: center;
+      max-width: 560px;
+      margin-bottom: 48px;
+      color: #fff;
+    }
+    .btn-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 40px;
+      background: transparent;
+      border: 1px solid rgba(74, 184, 212, 0.45);
+      color: var(--accent);
+      font-family: var(--font-h);
+      font-weight: 300;
+      font-size: 14px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.25s, border-color 0.25s, color 0.25s;
+    }
+    .btn-cta:hover {
+      background: rgba(74, 184, 212, 0.08);
+      border-color: rgba(74, 184, 212, 0.8);
+      color: #fff;
+    }
+    .btn-cta svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+
+    /* ─── FOOTER ────────────────────────────────────────── */
+    footer {
+      padding: 32px 48px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    footer .f-brand {
+      font-family: var(--font-h);
+      font-weight: 100;
+      font-size: 13px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(190, 210, 228, 0.4);
+    }
+    footer .f-slogan {
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+
+    /* ─── ANIMATE IN ────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    a[href*="unicorn.studio"] {
+      display: none !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+    }
+
+
+    /* ─── RESPONSIVE ─────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .container { padding: 0 28px; }
+      .approach-section--five-steps .approach-content.container {
+        max-width: min(920px, calc(100vw - 40px));
+        padding-left: clamp(20px, 4.5vw, 36px);
+        padding-right: clamp(20px, 4.5vw, 36px);
+      }
+      .problem-grid,
+      .cards,
+      .fork,
+      .products {
+        grid-template-columns: 1fr;
+      }
+      .problem-cell,
+      .card,
+      .fork-side {
+        padding: 32px 28px;
+      }
+      .product {
+        padding: 10px 28px 32px 28px;
+      }
+      .trust-item {
+        padding: 28px;
+      }
+      .cta-content {
+        padding: 90px 0 110px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .section {
+        padding: 72px 0;
+      }
+      .trust-section {
+        margin-top: -52px;
+        padding-top: calc(72px + 52px);
+      }
+      .anim-section {
+        height: 82vh;
+      }
+      .hero-logo {
+        top: 76%;
+        width: min(92vw, 520px);
+        white-space: normal;
+      }
+      .hero-logo .brand {
+        letter-spacing: 0.2em;
+        text-indent: 0.2em;
+      }
+      .problem-cell,
+      .card,
+      .fork-side,
+      .trust-item {
+        padding: 24px 20px;
+      }
+      .product {
+        padding: 8px 20px 24px 20px;
+      }
+      .step {
+        grid-template-columns: 1fr;
+      }
+      .step-num {
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+        min-height: 56px;
+      }
+      .step-body {
+        padding: 20px;
+      }
+      .trust-item {
+        gap: 16px;
+      }
+      .cta-inner .s-sub {
+        margin-bottom: 32px;
+      }
+      .btn-cta {
+        width: 100%;
+        justify-content: center;
+        padding: 14px 20px;
+      }
+      footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 24px 20px;
+      }
+      .approach-main-content .steps {
+        margin-top: 40px;
+      }
+      .approach-section--five-steps .approach-main-content .steps {
+        margin-top: 22px;
+      }
+      .approach-section--five-steps .approach-content.container {
+        max-width: calc(100vw - 32px);
+        padding-left: max(16px, env(safe-area-inset-left, 0px) + 14px);
+        padding-right: max(16px, env(safe-area-inset-right, 0px) + 14px);
+      }
+      .approach-section--five-steps .approach-bottom-mask {
+        height: clamp(120px, 22vh, 220px);
+      }
+      .what-we-do-premium::after {
+        width: min(86vw, 240px);
+        height: 64px;
+        bottom: 22px;
+      }
+      .trust-section::after {
+        width: min(86vw, 240px);
+        height: 64px;
+        bottom: 18px;
+      }
+    }
+
+    /* Низкое окно браузера — ещё плотнее, чтобы все 5 шагов были видны */
+    @media (max-height: 880px) {
+      .approach-section--five-steps {
+        padding-top: 28px;
+        padding-bottom: 36px;
+      }
+      .approach-section--five-steps .label {
+        margin-bottom: 12px;
+      }
+      .approach-section--five-steps .s-title {
+        font-size: clamp(20px, 2.6vw, 36px);
+        margin-bottom: 8px;
+      }
+      .approach-section--five-steps .s-sub {
+        font-size: clamp(14px, 1.12vw, 16px);
+        line-height: 1.45;
+      }
+      .approach-section--five-steps .approach-main-content .steps {
+        margin-top: 14px;
+      }
+      .approach-section--five-steps .step-body {
+        padding: 12px 16px;
+      }
+      .approach-section--five-steps .step-body h3 {
+        font-size: 16px;
+        margin-bottom: 3px;
+      }
+      .approach-section--five-steps .step-body p {
+        font-size: 14px;
+        line-height: 1.45;
+      }
+      .approach-section--five-steps .step-num {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════════ HERO ══════════════ -->
+  <section class="anim-section">
+    <div class="anim-wrap" id="wrap1">
+      <div style="width:1440px;height:900px" data-us-project="BGtyS23sBsZOdZ7k5SgO"></div>
+    </div>
+    <div class="fade-bottom"></div>
+    <div class="badge-cover"></div>
+    <div class="hero-logo">
+      <span class="brand">ИИНТЕГРАЦИЯ</span>
+      <span class="slogan">от цифрового надзора к умному управлению</span>
+    </div>
+  </section>
+
+  <!-- ══════════════ PROBLEM ══════════════ -->
+  <section class="section problem-section" style="padding-top: 80px;">
+    <div class="container">
+      <div class="reveal">
+        <span class="label">Проблема</span>
+        <h2 class="s-title">Текущая модель внедрения ИИ<br>в регионах <em>эффективна — но недостаточна</em></h2>
+        <p class="s-sub">Региональная практика уже сильна в контуре контроля: видеоаналитика, выявление нарушений, диспетчеризация. Но это только первый этаж зрелости.</p>
+      </div>
+      <div class="problem-grid reveal">
+        <div class="problem-cell">
+          <div class="cell-label">Этаж 1 — сегодня</div>
+          <h3>ИИ как инструмент контроля</h3>
+          <p>Камера → сигнал → предписание. Система умеет фиксировать и реагировать, снижать жалобы, усиливать надзор. Но застревает в режиме «быстро реагировать».</p>
+        </div>
+        <div class="problem-cell" style="border-left: 1px solid rgba(74,184,212,0.2);">
+          <div class="cell-label">Этаж 2 — целевой</div>
+          <h3>ИИ как инструмент управления</h3>
+          <p>Прогнозирование рисков, поддержка решений ЛПР, прозрачная ответственность алгоритмов. Система не реагирует — она предотвращает.</p>
+        </div>
+        <div class="problem-cell problem-footer" style="grid-column: 1/-1; background: rgba(74,184,212,0.03);">
+          <p class="problem-footer-text">Без перехода к прогнозированию и поддержке решений — любое внедрение ИИ остаётся <em style="font-style:normal; color:var(--accent); opacity:0.8;">«цифровой витриной»</em>, а не реальным управленческим инструментом.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ WHAT WE DO ══════════════ -->
+  <section class="section what-we-do-premium" style="padding-top: 40px;">
+    <div class="what-we-do-premium-anim" id="wrap9">
+      <div style="width: 1440px; height: 900px" data-us-project="Xll2FrSouG3FFZiJNKwg"></div>
+    </div>
+    <div class="what-we-do-premium-fade"></div>
+    <div class="container">
+      <div class="reveal">
+        <span class="label">Что мы делаем</span>
+        <h2 class="s-title">ИИнтеграция закрывает разрыв<br>между <em>внедрением</em> и стратегическим эффектом</h2>
+      </div>
+      <div class="cards reveal">
+        <div class="card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-6 4 2 7-6-4-6 4 2-7-6-4h7z"/></svg>
+          </div>
+          <h3>Для ЛПР</h3>
+          <p>Переводим ИИ-повестку с метрик надзора на метрики управленческого качества. Вы говорите языком результата — не языком технологий.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          </div>
+          <h3>Для аппарата</h3>
+          <p>Внедряем ИИ-помощников для документов, аналитики, обращений граждан и межведомственной координации.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24"><path d="M3 3h18v18H3zM3 9h18M3 15h18M9 3v18M15 3v18"/></svg>
+          </div>
+          <h3>Для системы управления</h3>
+          <p>Проектируем предиктивные сценарии в ЖКХ, социальной и городской повестке — там, где решения можно принимать заранее.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          </div>
+          <h3>Для публичной легитимности</h3>
+          <p>Формируем контур прозрачности, оценки рисков и ответственности алгоритмов — доверие к решениям власти как управленческий актив.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ SECOND ANIMATION ══════════════ -->
+  <section class="anim-section" style="margin-top: 80px; height: 70vh;">
+    <div class="anim-wrap" id="wrap2">
+      <div style="width:1440px;height:900px" data-us-project="x1DmGsnDgRLJugVM2HWM"></div>
+    </div>
+    <div class="fade-top"></div>
+    <div class="fade-bottom"></div>
+    <div class="badge-cover"></div>
+    <!-- Why Now overlay -->
+    <div style="position:absolute;inset:0;z-index:6;display:flex;align-items:center;justify-content:center;pointer-events:none;">
+      <div style="text-align:center;padding:0 40px;display:flex;flex-direction:column;align-items:center;">
+        <h2 style="margin-top:clamp(18px,2.8vh,32px);font-family:'Exo 2',sans-serif;font-weight:100;font-size:clamp(23px,3.1vw,46px);line-height:1.15;letter-spacing:0.18em;text-transform:uppercase;color:rgba(210,228,244,0.88);">Развилка уже наступила</h2>
+        <p style="margin-top:20px;font-family:var(--font-b);font-weight:300;font-size:clamp(14px,1.28vw,18px);line-height:1.65;color:rgba(140,170,200,0.55);letter-spacing:0.06em;">Либо ИИ останется «цифровой дубинкой» контроля.<br>Либо станет инфраструктурой умного государственного управления.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ WHY NOW DETAIL ══════════════ -->
+  <section class="section" style="padding-top: 80px;">
+    <div class="container">
+      <div class="fork reveal">
+        <div class="fork-side">
+          <div class="fork-tag old">Текущая модель</div>
+          <h3>Контрольный ИИ</h3>
+          <ul class="fork-list">
+            <li>Фиксирует нарушения и последствия</li>
+            <li>Усиливает надзорный контур</li>
+            <li>Реагирует на уже случившееся</li>
+            <li>Метрики — снижение жалоб, штрафы, скорость реакции</li>
+          </ul>
+        </div>
+        <div class="fork-side active">
+          <div class="fork-tag new">Следующий уровень</div>
+          <h3>Предиктивный ИИ</h3>
+          <ul class="fork-list">
+            <li>Прогнозирует риски до их реализации</li>
+            <li>Помогает человеку принимать решения</li>
+            <li>Повышает доверие к решениям власти</li>
+            <li>Метрики — качество управления, снижение рисков</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ APPROACH ══════════════ -->
+  <section class="approach-section approach-section--five-steps">
+    <div class="approach-anim" id="wrap4">
+      <div style="width:1440px;height:900px" data-us-project="KFs4rs5y6tsLcydQekJb"></div>
+    </div>
+    <div class="approach-anim-fade"></div>
+    <div class="badge-cover"></div>
+    <div class="approach-bottom-mask" aria-hidden="true"></div>
+    <div class="approach-content approach-main-content container">
+      <div class="reveal">
+        <span class="label">Наш подход</span>
+        <h2 class="s-title">От витрины кейсов —<br>к <em>системному контуру</em> внедрения</h2>
+        <p class="s-sub">Пять шагов от диагностики до масштабирования с KPI, которые важны ЛПР, а не только ИТ-службе.</p>
+      </div>
+      <div class="steps reveal">
+        <div class="step">
+          <div class="step-num">01</div>
+          <div class="step-body">
+            <h3>Диагностика уровня зрелости ИИ</h3>
+            <p>Оцениваем текущее состояние ИИ-внедрений в органе власти: что работает, что имитирует работу, где реальный потенциал.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <div class="step-body">
+            <h3>Карта барьеров</h3>
+            <p>Данные, регуляторика, компетенции, процессы — выявляем всё, что мешает переходу к предиктивной модели.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <div class="step-body">
+            <h3>Проектирование целевой архитектуры</h3>
+            <p>Predictive + Assistant + Governance. Строим не техническое решение, а управленческий контур с прозрачной ответственностью.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">04</div>
+          <div class="step-body">
+            <h3>Пилот с управленческими KPI</h3>
+            <p>60–90 дней. Показатели, которые важны ЛПР: качество решений, скорость реакции на риски, снижение ошибок планирования.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">05</div>
+          <div class="step-body">
+            <h3>Обучение команды и масштабирование</h3>
+            <p>Передаём компетенции, формируем регламенты, обеспечиваем независимость системы от внешних консультантов.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ PRODUCTS ══════════════ -->
+  <section class="approach-section">
+    <div class="approach-anim" id="wrap5">
+      <div style="width:1440px;height:900px" data-us-project="jqIUjWfkQBWiKRqcHjt8"></div>
+    </div>
+    <div class="approach-anim-fade"></div>
+    <div class="badge-cover"></div>
+    <div class="approach-content container">
+      <div class="reveal">
+        <span class="label">Продукты входа</span>
+        <h2 class="s-title">С чего мы <em>начинаем</em> работу</h2>
+        <p class="s-sub">Три формата для разных точек входа — в зависимости от вашего контекста и готовности к изменениям.</p>
+      </div>
+      <div class="products reveal">
+        <div class="product">
+          <div class="product-num">01</div>
+          <h3>Аналитическая записка для ЛПР / депутата</h3>
+          <p>Где регион сейчас, в чём риск «застревания в надзоре», какие 3 шага дадут стратегический эффект. Коротко и по делу.</p>
+        </div>
+        <div class="product">
+          <div class="product-num">02</div>
+          <h3>Закрытый брифинг / обучение для чиновников</h3>
+          <p>Как использовать ИИ в управлении без имитации цифровизации и без репутационных рисков. Формат 2–4 часа.</p>
+        </div>
+        <div class="product">
+          <div class="product-num">03</div>
+          <h3>Консалтинговый трек внедрения</h3>
+          <p>От первой диагностики до пилота и регламента масштабирования. Полный цикл с фиксированным результатом.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ TRUST ══════════════ -->
+  <section class="section trust-section">
+    <div class="trust-anim" id="wrap6">
+      <div style="width: 1440px; height: 900px" data-us-project="uMVctjA18YH4MI69yWe2"></div>
+    </div>
+    <div class="trust-anim-fade"></div>
+    <div class="container">
+      <div class="reveal">
+        <span class="label">Почему ИИнтеграция</span>
+        <h2 class="s-title">Разработка и внедрение —<br><em>в одном контуре</em></h2>
+      </div>
+      <div class="trust-list reveal">
+        <div class="trust-item">
+          <div class="t-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          </div>
+          <p>Совмещаем разработку ИИ-решений и практику их внедрения в управленческий контур. Не продаём технологию — строим систему.</p>
+        </div>
+        <div class="trust-item">
+          <div class="t-icon">
+            <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+          </div>
+          <p>Говорим с властью на языке результата, регуляторики и ответственности — не языке хайпа и технических спецификаций.</p>
+        </div>
+        <div class="trust-item">
+          <div class="t-icon">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <p>Имеем готовый экспертный контент для СМИ и публичной повестки — это усиливает доверие к команде и снижает риски внедрения.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ FINAL CTA ══════════════ -->
+  <section class="cta-section">
+
+    <!-- Animated background -->
+    <div class="cta-anim" id="wrap3">
+      <div style="width:1440px;height:900px" data-us-project="NaZqpM47HkuIWBu8madH"></div>
+    </div>
+    <div class="cta-anim-fade-top"></div>
+    <div class="cta-anim-fade-bottom"></div>
+    <div class="badge-cover"></div>
+
+    <!-- Content -->
+    <div class="cta-content">
+      <div class="container">
+        <div class="cta-inner reveal">
+          <span class="label" style="justify-content:center;">Следующий шаг</span>
+          <h2 class="s-title">Нужен не очередной ИИ-пилот,<br>а <em>работающая модель</em> внедрения?</h2>
+          <p class="s-sub">За 30 минут покажем, как в вашем контуре перейти от «контрольного ИИ» к «предиктивному ИИ» — с понятными KPI, дорожной картой и планом пилота.</p>
+          <a href="mailto:info@ii-integraciya.ru" class="btn-cta">
+            Назначить стратегическую встречу
+            <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ══════════════ FOOTER ══════════════ -->
+  <footer>
+    <span class="f-brand">ИИНТЕГРАЦИЯ</span>
+    <span class="f-slogan">От цифрового надзора к умному управлению © 2026</span>
+  </footer>
+
+  <!-- UnicornStudio -->
+  <script type="text/javascript">
+    !function(){
+      function pauseWhatWeDoBackground(scenes) {
+        try {
+          var wrap = document.getElementById("wrap9");
+          if (!wrap || !scenes || !scenes.length) return;
+          for (var i = 0; i < scenes.length; i++) {
+            var scene = scenes[i];
+            var el = scene && scene.element;
+            if (!el) continue;
+            if (el === wrap || wrap.contains(el)) {
+              scene.paused = true;
+              return;
+            }
+          }
+        } catch (e) {}
+      }
+      function runUnicornInit() {
+        var US = window.UnicornStudio;
+        if (!US || !US.init) return;
+        var p = US.init();
+        if (p && typeof p.then === "function") {
+          p.then(pauseWhatWeDoBackground).catch(function() {});
+        }
+      }
+      var u=window.UnicornStudio;
+      if(u&&u.init){
+        document.readyState==="loading"
+          ? document.addEventListener("DOMContentLoaded",runUnicornInit)
+          : runUnicornInit();
+      } else {
+        window.UnicornStudio={isInitialized:!1};
+        var i=document.createElement("script");
+        i.src="https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v2.1.6/dist/unicornStudio.umd.js";
+        i.onload=function(){
+          document.readyState==="loading"
+            ? document.addEventListener("DOMContentLoaded",runUnicornInit)
+            : runUnicornInit();
+        };
+        (document.head||document.body).appendChild(i);
+      }
+    }();
+  </script>
+
+  <!-- Не используем display:none: iOS/WebKit часто блокирует воспроизведение «невидимого» audio -->
+  <audio id="site-audio" preload="auto" autoplay muted playsinline loop src="telemetry-heartbeat.mp3" style="position:fixed;left:0;bottom:0;width:2px;height:2px;opacity:0.01;pointer-events:none;border:0;padding:0;margin:0;z-index:-1;">
+    <source src="telemetry-heartbeat.mp3" type="audio/mpeg" />
+  </audio>
+
+  <script>
+    /* Фон: только muted autoplay до жеста. После жеста — unmute + play; при отказе — fallback new Audio() в том же тике. Слушатели: window+document, capture (канвас Unicorn). */
+    (function() {
+      var SRC = 'telemetry-heartbeat.mp3';
+      var audio = document.getElementById('site-audio');
+      if (!audio) return;
+
+      audio.volume = 1;
+      audio.loop = true;
+
+      var gestureOpts = { capture: true, passive: true };
+      var nodes = [window, document];
+
+      function ensurePlayMutedTimeline() {
+        audio.muted = true;
+        var p = audio.play();
+        if (p && p.catch) p.catch(function() {});
+      }
+
+      if (audio.readyState >= 2) {
+        ensurePlayMutedTimeline();
+      } else {
+        audio.addEventListener('canplay', function onCanPlay() {
+          audio.removeEventListener('canplay', onCanPlay);
+          ensurePlayMutedTimeline();
+        });
+      }
+
+      audio.addEventListener('error', function() {
+        try {
+          console.warn('site-audio: нет файла или ошибка загрузки', SRC);
+        } catch (e) {}
+      });
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function() {
+          if (audio.paused) ensurePlayMutedTimeline();
+        });
+      } else if (audio.paused) {
+        ensurePlayMutedTimeline();
+      }
+
+      var backup = null;
+      var detached = false;
+
+      function detachGestures() {
+        if (detached) return;
+        detached = true;
+        nodes.forEach(function(node) {
+          ['pointerdown', 'touchstart', 'click', 'keydown'].forEach(function(evt) {
+            node.removeEventListener(evt, onUserGesture, gestureOpts);
+          });
+        });
+      }
+
+      function tryBackup() {
+        try {
+          if (!backup) {
+            backup = new Audio(SRC);
+            backup.loop = true;
+            backup.volume = 1;
+          }
+          var p = backup.play();
+          if (p && p.then) {
+            p.then(detachGestures).catch(function() {});
+          } else {
+            detachGestures();
+          }
+        } catch (e) {
+          detachGestures();
+        }
+      }
+
+      function onUserGesture() {
+        audio.muted = false;
+        audio.volume = 1;
+        if (audio.readyState === 0) {
+          try { audio.load(); } catch (e) {}
+        }
+        var p = audio.play();
+        if (p && typeof p.then === 'function') {
+          p.then(function() {
+            detachGestures();
+          }).catch(function() {
+            tryBackup();
+          });
+        } else {
+          if (audio.paused) tryBackup();
+          else detachGestures();
+        }
+      }
+
+      nodes.forEach(function(node) {
+        ['pointerdown', 'touchstart', 'click', 'keydown'].forEach(function(evt) {
+          node.addEventListener(evt, onUserGesture, gestureOpts);
+        });
+      });
+    })();
+
+    /* Scale canvases */
+    function scaleAll() {
+      document.querySelectorAll('.anim-wrap > div, .cta-anim > div, .approach-anim > div, .trust-anim > div, .what-we-do-premium-anim > div').forEach(function(el) {
+        var s = Math.max(window.innerWidth / 1440, window.innerHeight / 900);
+        el.style.transform = 'scale(' + s + ')';
+      });
+    }
+    scaleAll();
+    window.addEventListener('resize', scaleAll);
+
+    /* Kill badge */
+    function killBadge(el) {
+      if (!el || !el.nodeType) return;
+      var href = el.getAttribute ? (el.getAttribute('href') || '') : '';
+      var txt  = (el.textContent || '').trim();
+      var low = txt.toLowerCase();
+      if (href.indexOf('unicorn.studio') !== -1 || low.indexOf('made with') !== -1 || low.indexOf('unicorn.studio') !== -1 || txt === 'New text') {
+        el.style.cssText = 'display:none!important;opacity:0!important;visibility:hidden!important;';
+        try { el.parentNode && el.parentNode.removeChild(el); } catch(e){}
+      }
+    }
+    var obs = new MutationObserver(function(muts) {
+      muts.forEach(function(m) {
+        m.addedNodes.forEach(function(n) {
+          killBadge(n);
+          if (n.querySelectorAll) n.querySelectorAll('*').forEach(killBadge);
+        });
+      });
+    });
+    obs.observe(document.body, { childList: true, subtree: true });
+    function sweep() {
+      document.querySelectorAll('a,div,span').forEach(function(el) {
+        var href = el.getAttribute ? (el.getAttribute('href') || '') : '';
+        var t = (el.textContent || '').trim().toLowerCase();
+        if (href.indexOf('unicorn.studio') !== -1 || t.indexOf('made with') !== -1 || t.indexOf('unicorn.studio') !== -1 || (el.textContent||'').trim() === 'New text') {
+          el.style.cssText = 'display:none!important;';
+          try { el.parentNode && el.parentNode.removeChild(el); } catch(e){}
+        }
+      });
+    }
+    setTimeout(sweep, 500);
+    setTimeout(sweep, 1500);
+    setTimeout(sweep, 3500);
+
+    /* Scroll reveal */
+    var reveals = document.querySelectorAll('.reveal');
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(function(el) { io.observe(el); });
+  </script>
+
+</body>
+</html>
