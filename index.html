@@ -10,7 +10,7 @@
   <meta property="og:description" content="Переход от цифрового контроля к предиктивному управлению с понятными KPI, дорожной картой и пилотом." />
   <meta property="og:type" content="website" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@100;200;300;400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@200;300;400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -65,33 +65,201 @@
     /* ─── HERO LOGO ─────────────────────────────────────── */
     .hero-logo {
       position: absolute;
-      top: 72%; left: 50%;
+      top: 88%; left: 50%;
       transform: translate(-50%, -50%);
       z-index: 10;
       text-align: center;
-      pointer-events: none;
       user-select: none;
       white-space: nowrap;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      pointer-events: auto;
     }
-    .hero-logo .brand {
-      display: block;
-      font-family: var(--font-h);
-      font-weight: 100;
-      font-size: clamp(20px, 2.6vw, 42px);
+    .logo-block {
+      position: relative;
+      display: inline-block;
+      cursor: default;
+    }
+    .ghost {
+      position: absolute;
+      top: 4px;
+      left: 5px;
+      font-family: 'Exo 2', sans-serif;
+      font-size: clamp(26px, 4.2vw, 50px);
+      font-weight: 200;
+      letter-spacing: 0.36em;
+      color: transparent;
+      -webkit-text-stroke: 0.5px rgba(22,195,228,0.08);
+      white-space: nowrap;
+      pointer-events: none;
+      user-select: none;
+      transition: -webkit-text-stroke 0.6s;
+    }
+    .logo-block:hover .ghost {
+      -webkit-text-stroke: 0.5px rgba(22,195,228,0.22);
+    }
+    .row {
+      display: flex;
+      align-items: center;
+      white-space: nowrap;
+      gap: 0;
+      position: relative;
+    }
+    .oct-top {
+      position: absolute;
+      top: -28px;
+      left: -18px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      transform: scale(0.5);
+      animation: octRotate 8s linear infinite;
+      opacity: 0.8;
+    }
+    @keyframes octRotate {
+      0% { transform: scale(0.5) rotate(0deg); }
+      100% { transform: scale(0.5) rotate(360deg); }
+    }
+    .i-first {
+      font-family: 'Exo 2', sans-serif;
+      font-size: clamp(26px, 4.2vw, 50px);
+      font-weight: 400;
       letter-spacing: 0.28em;
-      text-indent: 0.28em;
-      text-transform: uppercase;
-      color: rgba(190, 210, 228, 0.85);
+      color: transparent;
+      -webkit-text-stroke: 0.8px rgba(22,195,228,0.78);
+      flex-shrink: 0;
+      transition: letter-spacing 0.7s cubic-bezier(0.16,1,0.3,1);
+    }
+    .logo-block:hover .i-first {
+      letter-spacing: 0.34em;
+    }
+    .scan-zone {
+      position: relative;
+      display: inline-flex;
+      align-items: baseline;
+      overflow: hidden;
+    }
+    .i-second {
+      font-family: 'Exo 2', sans-serif;
+      font-size: clamp(26px, 4.2vw, 50px);
+      font-weight: 400;
+      letter-spacing: 0.28em;
+      color: transparent;
+      -webkit-text-stroke: 0.8px rgba(22,195,228,0.78);
+      position: relative;
+      z-index: 2;
+      flex-shrink: 0;
+      transition: letter-spacing 0.7s cubic-bezier(0.16,1,0.3,1);
+    }
+    .logo-block:hover .i-second {
+      letter-spacing: 0.34em;
+    }
+    .rest-wrap {
+      position: relative;
+      display: inline-block;
+      z-index: 2;
+    }
+    .rest-text {
+      font-family: 'Exo 2', sans-serif;
+      font-size: clamp(22px, 3.6vw, 42px);
+      font-weight: 200;
+      letter-spacing: 0.28em;
+      color: rgba(200,218,230,0.82);
+      display: block;
+      transition: color 0.5s, letter-spacing 0.7s cubic-bezier(0.16,1,0.3,1);
+    }
+    .logo-block:hover .rest-text {
+      color: rgba(218,234,242,0.95);
+      letter-spacing: 0.34em;
+    }
+    .circuit-svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 3;
+      opacity: 0.7;
+    }
+    .grid-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.28;
+      transition: opacity 0.5s;
+    }
+    .logo-block:hover .grid-svg {
+      opacity: 0.72;
+    }
+    .scanline {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 5;
+      opacity: 0;
+      overflow: hidden;
+    }
+    .scanline::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      left: -2px;
+      background: linear-gradient(180deg, transparent 0%, rgba(22,195,228,0.4) 15%, rgba(255,255,255,0.95) 50%, rgba(22,195,228,0.4) 85%, transparent 100%);
+      box-shadow: 0 0 8px 3px rgba(22,195,228,0.5), 0 0 20px 6px rgba(22,195,228,0.15);
+    }
+    .logo-block:hover .scanline {
+      opacity: 1;
+      animation: hScan 2.6s cubic-bezier(0.4,0,0.6,1) infinite;
+    }
+    @keyframes hScan {
+      0% { transform: translateX(-2px); }
+      100% { transform: translateX(calc(100% + 2px)); }
     }
     .hero-logo .slogan {
-      display: block;
-      margin-top: 14px;
-      font-family: var(--font-b);
+      font-family: 'Exo 2', sans-serif;
+      font-size: clamp(9px, 1.2vw, 11px);
       font-weight: 300;
-      font-size: clamp(11px, 1.1vw, 15px);
-      letter-spacing: 0.18em;
+      letter-spacing: 0.45em;
+      color: rgba(150,192,212,0.58);
       text-transform: uppercase;
-      color: rgba(130, 170, 200, 0.5);
+      text-align: center;
+      margin-top: 16px;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.6s 0.15s, transform 0.6s 0.15s, color 0.4s, letter-spacing 0.5s;
+    }
+    .logo-block:hover ~ .slogan {
+      opacity: 1;
+      transform: translateY(0);
+      color: rgba(22,195,228,0.78);
+      letter-spacing: 0.50em;
+    }
+    .hero-logo .dline {
+      width: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(22,195,228,0.4), transparent);
+      margin: 18px auto 16px;
+      transition: width 0.8s cubic-bezier(0.16,1,0.3,1);
+    }
+    .logo-block:hover ~ .dline {
+      width: min(520px, 80vw);
+    }
+    .oct-bottom {
+      margin-top: 32px;
+      opacity: 0;
+      transform: translateY(10px) scale(0.7);
+      transition: opacity 0.6s 0.3s, transform 0.6s 0.3s;
+    }
+    .logo-block:hover ~ .oct-bottom {
+      opacity: 0;
+      transform: translateY(10px) scale(0.7);
     }
 
     /* ─── CONTENT SECTIONS ──────────────────────────────── */
@@ -1032,8 +1200,150 @@
     <div class="fade-bottom"></div>
     <div class="badge-cover"></div>
     <div class="hero-logo">
-      <span class="brand">ИИНТЕГРАЦИЯ</span>
+      <div class="logo-block">
+        <div class="ghost">ИИНТЕГРАЦИЯ</div>
+        <div class="row">
+          <span class="oct-top">
+            <svg width="46" height="46" viewBox="0 0 64 64" fill="none">
+              <defs>
+                <filter id="fo" x="-40%" y="-40%" width="180%" height="180%">
+                  <feGaussianBlur stdDeviation="2" result="b"/>
+                  <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+                <filter id="foc" x="-60%" y="-60%" width="220%" height="220%">
+                  <feGaussianBlur stdDeviation="3" result="b"/>
+                  <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+              </defs>
+              <polygon points="32,4 52,12 60,32 52,52 32,60 12,52 4,32 12,12" fill="rgba(22,195,228,.04)" stroke="rgba(22,195,228,.65)" stroke-width="1"/>
+              <polygon points="32,13 46,19 52,32 46,45 32,51 18,45 12,32 18,19" fill="none" stroke="rgba(22,195,228,.22)" stroke-width=".5" stroke-dasharray="2,3"/>
+              <rect x="21" y="21" width="22" height="22" rx="1" transform="rotate(45 32 32)" fill="rgba(22,195,228,.06)" stroke="rgba(22,195,228,.45)" stroke-width=".7"/>
+              <line x1="32" y1="13" x2="32" y2="22" stroke="rgba(22,195,228,.38)" stroke-width=".6"/>
+              <line x1="32" y1="42" x2="32" y2="51" stroke="rgba(22,195,228,.38)" stroke-width=".6"/>
+              <line x1="12" y1="32" x2="22" y2="32" stroke="rgba(22,195,228,.38)" stroke-width=".6"/>
+              <line x1="42" y1="32" x2="52" y2="32" stroke="rgba(22,195,228,.38)" stroke-width=".6"/>
+              <line x1="18" y1="19" x2="24" y2="24" stroke="rgba(22,195,228,.25)" stroke-width=".5"/>
+              <line x1="46" y1="19" x2="40" y2="24" stroke="rgba(22,195,228,.25)" stroke-width=".5"/>
+              <line x1="18" y1="45" x2="24" y2="40" stroke="rgba(22,195,228,.25)" stroke-width=".5"/>
+              <line x1="46" y1="45" x2="40" y2="40" stroke="rgba(22,195,228,.25)" stroke-width=".5"/>
+              <circle cx="32" cy="32" r="5.5" fill="rgba(22,195,228,.08)" stroke="rgba(22,195,228,.65)" stroke-width=".8"/>
+              <circle cx="32" cy="32" r="2.8" fill="rgba(22,195,228,.6)" filter="url(#foc)"/>
+              <circle cx="32" cy="32" r="1.2" fill="rgba(255,255,255,.95)"/>
+              <circle cx="32" cy="4"  r="2" fill="rgba(22,195,228,.9)" filter="url(#fo)"/>
+              <circle cx="60" cy="32" r="2" fill="rgba(22,195,228,.9)" filter="url(#fo)"/>
+              <circle cx="32" cy="60" r="2" fill="rgba(22,195,228,.9)" filter="url(#fo)"/>
+              <circle cx="4"  cy="32" r="2" fill="rgba(22,195,228,.9)" filter="url(#fo)"/>
+              <circle cx="52" cy="12" r="1.6" fill="rgba(200,165,30,.9)" filter="url(#fo)"/>
+              <circle cx="52" cy="52" r="1.6" fill="rgba(200,165,30,.9)" filter="url(#fo)"/>
+              <circle cx="12" cy="52" r="1.6" fill="rgba(200,165,30,.9)" filter="url(#fo)"/>
+              <circle cx="12" cy="12" r="1.6" fill="rgba(200,165,30,.9)" filter="url(#fo)"/>
+              <circle cx="32" cy="4.8"  r=".7" fill="rgba(255,255,255,.8)"/>
+              <circle cx="51.4" cy="12.6" r=".6" fill="rgba(255,255,255,.7)"/>
+              <circle cx="59.2" cy="32.8" r=".7" fill="rgba(255,255,255,.8)"/>
+            </svg>
+          </span>
+          <span class="i-first">И</span>
+          <span class="scan-zone">
+            <svg class="grid-svg" viewBox="0 0 640 68" preserveAspectRatio="none">
+              <defs>
+                <pattern id="pg" width="12" height="12" patternUnits="userSpaceOnUse">
+                  <path d="M12 0L0 0L0 12" fill="none" stroke="rgba(22,195,228,.55)" stroke-width=".5"/>
+                </pattern>
+                <filter id="sf" x="-60%" y="-60%" width="220%" height="220%">
+                  <feGaussianBlur stdDeviation="2" result="b"/>
+                  <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+              </defs>
+              <rect width="640" height="68" fill="url(#pg)"/>
+              <circle cx="55"  cy="20" r="2.2" fill="#4ab8ff" opacity=".85" filter="url(#sf)"/>
+              <circle cx="155" cy="48" r="2.4" fill="#6dcfff" opacity=".88" filter="url(#sf)"/>
+              <circle cx="255" cy="14" r="2.0" fill="#4ab8ff" opacity=".82" filter="url(#sf)"/>
+              <circle cx="360" cy="54" r="2.2" fill="#4ab8ff" opacity=".85" filter="url(#sf)"/>
+              <circle cx="460" cy="28" r="2.0" fill="#6dcfff" opacity=".80" filter="url(#sf)"/>
+              <circle cx="560" cy="58" r="1.8" fill="#4ab8ff" opacity=".75" filter="url(#sf)"/>
+              <rect x="53.5"  y="18.5" width="2.5" height="2.5" fill="rgba(200,165,30,.72)"/>
+              <rect x="253.5" y="12.5" width="2.5" height="2.5" fill="rgba(200,165,30,.70)"/>
+              <rect x="458.5" y="26.5" width="2.5" height="2.5" fill="rgba(200,165,30,.65)"/>
+            </svg>
+            <div class="scanline"></div>
+            <span class="i-second">И</span>
+            <span class="rest-wrap">
+              <span class="rest-text">НТЕГРАЦИЯ</span>
+              <svg class="circuit-svg" viewBox="0 0 560 64" preserveAspectRatio="none">
+                <defs>
+                  <filter id="sg" x="-60%" y="-60%" width="220%" height="220%">
+                    <feGaussianBlur stdDeviation="2" result="b"/>
+                    <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                  </filter>
+                </defs>
+                <line x1="0" y1="13" x2="560" y2="13" stroke="rgba(180,148,22,.38)" stroke-width=".6"/>
+                <line x1="0" y1="32" x2="560" y2="32" stroke="rgba(180,148,22,.48)" stroke-width=".7"/>
+                <line x1="0" y1="51" x2="560" y2="51" stroke="rgba(180,148,22,.34)" stroke-width=".55"/>
+                <line x1="80"  y1="0" x2="80"  y2="64" stroke="rgba(22,195,228,.14)" stroke-width=".35"/>
+                <line x1="200" y1="0" x2="200" y2="64" stroke="rgba(22,195,228,.14)" stroke-width=".35"/>
+                <line x1="320" y1="0" x2="320" y2="64" stroke="rgba(22,195,228,.14)" stroke-width=".35"/>
+                <line x1="440" y1="0" x2="440" y2="64" stroke="rgba(22,195,228,.14)" stroke-width=".35"/>
+                <polyline points="80,13 140,13 140,32"  stroke="rgba(180,148,22,.82)" stroke-width=".9" fill="none"/>
+                <polyline points="200,32 280,32 280,51" stroke="rgba(180,148,22,.76)" stroke-width=".85" fill="none"/>
+                <polyline points="320,13 400,13 400,32" stroke="rgba(180,148,22,.74)" stroke-width=".8"  fill="none"/>
+                <polyline points="440,51 510,51 510,32" stroke="rgba(180,148,22,.68)" stroke-width=".75" fill="none"/>
+                <rect x="138.5" y="30.5" width="3" height="3" fill="rgba(200,165,30,.9)"/>
+                <rect x="278.5" y="49.5" width="3" height="3" fill="rgba(200,165,30,.88)"/>
+                <rect x="398.5" y="30.5" width="3" height="3" fill="rgba(200,165,30,.85)"/>
+                <rect x="508.5" y="30.5" width="3" height="3" fill="rgba(200,165,30,.80)"/>
+                <circle cx="140" cy="32" r="3.2" fill="#4ab8ff" opacity=".92" filter="url(#sg)"/>
+                <circle cx="280" cy="51" r="2.8" fill="#6dcfff" opacity=".88" filter="url(#sg)"/>
+                <circle cx="400" cy="32" r="3.0" fill="#4ab8ff" opacity=".90" filter="url(#sg)"/>
+                <circle cx="510" cy="32" r="2.6" fill="#6dcfff" opacity=".85" filter="url(#sg)"/>
+                <circle cx="138.8" cy="30.8" r="1.0" fill="rgba(255,255,255,.82)"/>
+                <circle cx="278.8" cy="49.8" r=".9"  fill="rgba(255,255,255,.78)"/>
+                <circle cx="398.8" cy="30.8" r=".95" fill="rgba(255,255,255,.80)"/>
+              </svg>
+            </span>
+          </span>
+        </div>
+      </div>
+      <div class="dline"></div>
       <span class="slogan">от цифрового надзора к умному управлению</span>
+      <span class="oct-wrap oct-bottom">
+        <svg width="46" height="46" viewBox="0 0 64 64" fill="none">
+          <defs>
+            <filter id="fo2" x="-40%" y="-40%" width="180%" height="180%">
+              <feGaussianBlur stdDeviation="2" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+            <filter id="foc2" x="-60%" y="-60%" width="220%" height="220%">
+              <feGaussianBlur stdDeviation="3" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <polygon points="32,4 52,12 60,32 52,52 32,60 12,52 4,32 12,12" fill="rgba(22,195,228,.04)" stroke="rgba(22,195,228,.65)" stroke-width="1"/>
+          <polygon points="32,13 46,19 52,32 46,45 32,51 18,45 12,32 18,19" fill="none" stroke="rgba(22,195,228,.22)" stroke-width=".5" stroke-dasharray="2,3"/>
+          <rect x="21" y="21" width="22" height="22" rx="1" transform="rotate(45 32 32)" fill="rgba(22,195,228,.06)" stroke="rgba(22,195,228,.45)" stroke-width=".7"/>
+          <line x1="32" y1="13" x2="32" y2="22" stroke="rgba(22,195,228,.38)" stroke-width=".6"/>
+          <line x1="32" y1="42" x2="32" y2="51" stroke="rgba(22,195,228,.38)" stroke-width=".6"/>
+          <line x1="12" y1="32" x2="22" y2="32" stroke="rgba(22,195,228,.38)" stroke-width=".6"/>
+          <line x1="42" y1="32" x2="52" y2="32" stroke="rgba(22,195,228,.38)" stroke-width=".6"/>
+          <line x1="18" y1="19" x2="24" y2="24" stroke="rgba(22,195,228,.25)" stroke-width=".5"/>
+          <line x1="46" y1="19" x2="40" y2="24" stroke="rgba(22,195,228,.25)" stroke-width=".5"/>
+          <line x1="18" y1="45" x2="24" y2="40" stroke="rgba(22,195,228,.25)" stroke-width=".5"/>
+          <line x1="46" y1="45" x2="40" y2="40" stroke="rgba(22,195,228,.25)" stroke-width=".5"/>
+          <circle cx="32" cy="32" r="5.5" fill="rgba(22,195,228,.08)" stroke="rgba(22,195,228,.65)" stroke-width=".8"/>
+          <circle cx="32" cy="32" r="2.8" fill="rgba(22,195,228,.6)" filter="url(#foc2)"/>
+          <circle cx="32" cy="32" r="1.2" fill="rgba(255,255,255,.95)"/>
+          <circle cx="32" cy="4"  r="2" fill="rgba(22,195,228,.9)" filter="url(#fo2)"/>
+          <circle cx="60" cy="32" r="2" fill="rgba(22,195,228,.9)" filter="url(#fo2)"/>
+          <circle cx="32" cy="60" r="2" fill="rgba(22,195,228,.9)" filter="url(#fo2)"/>
+          <circle cx="4"  cy="32" r="2" fill="rgba(22,195,228,.9)" filter="url(#fo2)"/>
+          <circle cx="52" cy="12" r="1.6" fill="rgba(200,165,30,.9)" filter="url(#fo2)"/>
+          <circle cx="52" cy="52" r="1.6" fill="rgba(200,165,30,.9)" filter="url(#fo2)"/>
+          <circle cx="12" cy="52" r="1.6" fill="rgba(200,165,30,.9)" filter="url(#fo2)"/>
+          <circle cx="12" cy="12" r="1.6" fill="rgba(200,165,30,.9)" filter="url(#fo2)"/>
+          <circle cx="32" cy="4.8"  r=".7" fill="rgba(255,255,255,.8)"/>
+          <circle cx="51.4" cy="12.6" r=".6" fill="rgba(255,255,255,.7)"/>
+          <circle cx="59.2" cy="32.8" r=".7" fill="rgba(255,255,255,.8)"/>
+        </svg>
+      </span>
     </div>
   </section>
 
