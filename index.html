@@ -1785,11 +1785,15 @@
         } catch (e) {}
       }
       function runUnicornInit() {
-        var US = window.UnicornStudio;
-        if (!US || !US.init) return;
-        var p = US.init();
-        if (p && typeof p.then === "function") {
-          p.then(pauseWhatWeDoBackground).catch(function() {});
+        try {
+          var US = window.UnicornStudio;
+          if (!US || !US.init) return;
+          var p = US.init();
+          if (p && typeof p.then === "function") {
+            p.then(pauseWhatWeDoBackground).catch(function() {});
+          }
+        } catch (e) {
+          console.warn('Unicorn init error:', e);
         }
       }
       var u=window.UnicornStudio;
@@ -1823,8 +1827,9 @@
       var audio = document.getElementById('site-audio');
       if (!audio) return;
 
-      audio.volume = 1;
+      audio.volume = 0.3;
       audio.loop = true;
+      audio.muted = true;
 
       var gestureOpts = { capture: true, passive: true };
       var nodes = [window, document];
@@ -1876,7 +1881,8 @@
           if (!backup) {
             backup = new Audio(SRC);
             backup.loop = true;
-            backup.volume = 1;
+            backup.volume = 0.3;
+            backup.muted = true;
           }
           var p = backup.play();
           if (p && p.then) {
@@ -1890,8 +1896,7 @@
       }
 
       function onUserGesture() {
-        audio.muted = false;
-        audio.volume = 1;
+        audio.muted = true;
         if (audio.readyState === 0) {
           try { audio.load(); } catch (e) {}
         }
